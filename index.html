@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>playr — et navn å leke med</title>
+<meta name="description" content="playr.no — et kort, lekent domene for aktiviteter, spill og lek. Kommer snart." />
+<meta name="theme-color" content="#0b0b12" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%F0%9F%8E%B3%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #0b0b12;
+    --fg: #f4f4f8;
+    --muted: #9a9ab0;
+    --accent: #ff5b7a;
+    --accent-2: #7c6bff;
+    --accent-3: #ffd166;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60% 50% at 20% 20%, rgba(255,91,122,0.22), transparent 60%),
+      radial-gradient(45% 45% at 85% 30%, rgba(124,107,255,0.25), transparent 60%),
+      radial-gradient(50% 50% at 60% 90%, rgba(255,209,102,0.18), transparent 60%),
+      var(--bg);
+  }
+
+  main {
+    display: grid;
+    place-items: center;
+    padding: 6vh 6vw;
+  }
+
+  .card {
+    max-width: 680px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 12vw, 7rem);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin: 0 0 1.5rem;
+    background: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 55%, var(--accent-3) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .brand .dot {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--accent-3);
+    align-self: flex-end;
+    margin-bottom: 0.18em;
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18%); }
+  }
+
+  h1 {
+    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--muted);
+    margin: 0 0 2.5rem;
+    max-width: 48ch;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .tags li {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.03);
+    color: var(--muted);
+  }
+
+  .contact {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .contact strong { color: var(--fg); font-weight: 600; }
+  .contact a {
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    transition: color 0.15s;
+  }
+  .contact a:hover { color: var(--accent); }
+
+  footer {
+    padding: 1.5rem 6vw;
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  footer .lang {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+  footer .lang button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font: inherit;
+    padding: 0;
+    cursor: pointer;
+  }
+  footer .lang button[aria-pressed="true"] { color: var(--fg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand .dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+
+<main>
+  <div class="card">
+    <div class="brand" aria-label="playr">
+      <span>playr</span><span class="dot"></span>
+    </div>
+
+    <h1 data-i18n="tagline">Et navn å leke med.</h1>
+    <p class="lede" data-i18n="lede">
+      playr.no er et kort, lekent domene — klart for noe morsomt.
+      Aktiviteter, spill, lek, sport, eller en helt ny idé.
+    </p>
+
+    <ul class="tags" aria-label="Konsepter">
+      <li>🎳 aktiviteter</li>
+      <li>🎮 spill</li>
+      <li>🧩 lek</li>
+      <li>⚽ sport</li>
+      <li>🎯 opplevelser</li>
+    </ul>
+
+    <p class="contact">
+      <strong data-i18n="contactTitle">Interessert i domenet?</strong><br>
+      <span data-i18n="contactBody">Send en henvendelse til</span>
+      <a id="mail" href="#">laster…</a>.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <span>© playr.no</span>
+  <span class="lang" role="group" aria-label="Språk">
+    <button type="button" data-lang="no" aria-pressed="true">Norsk</button>
+    <span aria-hidden="true">·</span>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+  </span>
+</footer>
+
+<script>
+  // Lightly obfuscated email — assembled at runtime to avoid naive scrapers.
+  (function () {
+    var user = "hei";
+    var domain = "playr.no";
+    var addr = user + "@" + domain;
+    var a = document.getElementById("mail");
+    a.textContent = addr;
+    a.href = "mailto:" + addr + "?subject=" + encodeURIComponent("Henvendelse om playr.no");
+  })();
+
+  // Simple NO/EN toggle.
+  var i18n = {
+    no: {
+      tagline: "Et navn å leke med.",
+      lede: "playr.no er et kort, lekent domene — klart for noe morsomt. Aktiviteter, spill, lek, sport, eller en helt ny idé.",
+      contactTitle: "Interessert i domenet?",
+      contactBody: "Send en henvendelse til"
+    },
+    en: {
+      tagline: "A name to play with.",
+      lede: "playr.no is a short, playful domain — ready for something fun. Activities, games, play, sports, or a brand-new idea.",
+      contactTitle: "Interested in the domain?",
+      contactBody: "Send an inquiry to"
+    }
+  };
+
+  document.querySelectorAll("[data-lang]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var lang = btn.getAttribute("data-lang");
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n");
+        if (i18n[lang][key]) el.textContent = i18n[lang][key];
+      });
+      document.querySelectorAll("[data-lang]").forEach(function (b) {
+        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+      });
+    });
+  });
+</script>
+</body>
+</html>
